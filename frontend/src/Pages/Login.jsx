@@ -5,11 +5,11 @@ import { userAuthStore } from "../store/authCheck";
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { login } = userAuthStore();
+  const { login, isLogginin } = userAuthStore();
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(email, password);
-    login({email, password});
+    login({ email, password });
   };
   return (
     <div className="h-screen w-full hero-bg">
@@ -53,8 +53,9 @@ const Login = () => {
                 onChange={(e) => setpassword(e.target.value)}
               />
             </div>
-            <button className="w-full bg-red-600 py-2 font-semibold text-white rounded-md hover:bg-red-700">
-              Login
+            <button className="w-full bg-red-600 py-2 font-semibold text-white rounded-md hover:bg-red-700"
+            disabled={isLogginin}>
+              {isLogginin ? "Loading " : "Login"}
             </button>
           </form>
           <div className="text-center text-gray-400">
